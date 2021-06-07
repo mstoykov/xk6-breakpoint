@@ -33,3 +33,9 @@ export default function() {
     breakpoint.break()
 }
 ```
+
+Some asciinema showing how to (ab)use it:
+
+[![basic](https://asciinema.org/a/GvhZaBg8WiL1yh9gdsLveJaPB.svg)](https://asciinema.org/a/GvhZaBg8WiL1yh9gdsLveJaPB)
+[![advanced](https://asciinema.org/a/dPKP4kcotM6RU5kgWUkfGFbR6.svg)](https://asciinema.org/a/dPKP4kcotM6RU5kgWUkfGFbR6)
+[![multiple VUs (not recommended)](https://asciinema.org/a/hzEZdFHVkDhQyGXiOyOwhjmfc.svg)](https://asciinema.org/a/hzEZdFHVkDhQyGXiOyOwhjmfc)
