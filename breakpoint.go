@@ -9,6 +9,7 @@ import (
 	"os"
 	"strings"
 
+	"github.com/dop251/goja"
 	"go.k6.io/k6/js/common"
 	"go.k6.io/k6/js/modules"
 )
@@ -19,7 +20,7 @@ func init() {
 
 type breakpoint struct{}
 
-func (_ *breakpoint) Break(ctx context.Context) {
+func (_ *breakpoint) Break(ctx context.Context, o *goja.Object) {
 	rt := common.GetRuntime(ctx)
 	reader := bufio.NewReader(os.Stdin)
 	fmt.Println("breakpoint reached `continue` will continue script. Anything typed before that will be executed.")
@@ -30,6 +31,12 @@ func (_ *breakpoint) Break(ctx context.Context) {
 		text = strings.Replace(text, "\n", "", -1)
 		if "continue" == text {
 			return
+		}
+		if strings.HasPrefix(text, "?") {
+			text = strings.TrimPrefix(text, "?")
+			v := o.Get(text)
+			fmt.Printf("?%s= %s\n", text, v)
+			continue
 		}
 		v, err := rt.RunString(text)
 		if err != nil {
